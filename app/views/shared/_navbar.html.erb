@@ -1,0 +1,47 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+  <%= link_to(image_tag("/images/peepoHappy_banner_small.png", size: "100x48", alt: "peepoHappy"), root_path) %>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to("Home", root_path, class: "navbar-item") %>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if user_signed_in? %>
+            <%= link_to("Edit", edit_user_registration_path, class: "button is-light") %>
+            <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: "button is-light") %>
+          <% else %>
+            <%= link_to("Sign Up", new_user_registration_path, class: "button is-primary") %>
+            <%= link_to("Sign In", new_user_session_path, class: "button is-light") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
