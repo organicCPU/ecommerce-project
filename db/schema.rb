@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_234308) do
+ActiveRecord::Schema.define(version: 2019_11_13_211702) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -36,6 +36,41 @@ ActiveRecord::Schema.define(version: 2019_11_07_234308) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_number"
+    t.decimal "price"
+    t.decimal "total"
+    t.integer "orders_id", null: false
+    t.integer "products_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["orders_id"], name: "index_order_details_on_orders_id"
+    t.index ["products_id"], name: "index_order_details_on_products_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "order_number"
+    t.decimal "price"
+    t.string "transaction_status"
+    t.boolean "paid"
+    t.integer "region_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["region_id"], name: "index_orders_on_region_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price"
+    t.integer "supplier_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -64,4 +99,9 @@ ActiveRecord::Schema.define(version: 2019_11_07_234308) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "order_details", "orders", column: "orders_id"
+  add_foreign_key "order_details", "products", column: "products_id"
+  add_foreign_key "orders", "regions"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "suppliers"
 end
