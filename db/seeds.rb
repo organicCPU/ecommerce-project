@@ -39,14 +39,14 @@ Page.create(
 end
 
 # Categories
-10.times do
+4.times do
   category = Category.create(
     name: Faker::Commerce.unique.department,
     description: nil
   )
 
   # Products
-  10.times do
+  25.times do
     product = category.products.build(
       name: Faker::Commerce.product_name,
       description: nil,
