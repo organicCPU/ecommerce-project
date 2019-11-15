@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'page/show'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :suppliers, only: :index
   resources :products, only: :index
-  resources :page, only: :show
+  get ':permalink', to: 'pages#permalink', as: 'pages'
 
   root to: 'products#index'
 end
