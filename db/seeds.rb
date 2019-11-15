@@ -10,6 +10,9 @@
 # AdminUser.destroy_all
 Product.destroy_all
 Page.destroy_all
+Product.destroy_all
+Category.destroy_all
+Supplier.destroy_all
 
 # Pages
 Page.create(
@@ -25,5 +28,33 @@ Page.create(
   show_in_navbar: true,
   permalink: 'contact'
 )
+
+# Suppliers
+
+10.times do
+  Supplier.create(
+    name: Faker::Company.name,
+    description: Faker::Company.bs
+  )
+end
+
+# Categories
+10.times do
+  category = Category.create(
+    name: Faker::Commerce.unique.department,
+    description: nil
+  )
+
+  # Products
+  10.times do
+    product = category.products.build(
+      name: Faker::Commerce.product_name,
+      description: nil,
+      price: Faker::Commerce.price,
+      supplier: Supplier.order('RANDOM()').first
+    )
+    product.save
+  end
+end
 
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
