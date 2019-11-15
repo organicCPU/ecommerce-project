@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :suppliers, only: :index
-  resources :products, only: :index
+  resources :suppliers, only: [:index, :show]
+  resources :products, only: [:index, :show]
   get ':permalink', to: 'pages#permalink', as: 'pages'
 
   root to: 'products#index'
