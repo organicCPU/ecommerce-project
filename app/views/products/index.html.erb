@@ -1,3 +1,5 @@
 <% @products.each do |prod| %>
   <p><%= link_to prod.name, prod %></p>
 <% end %>
+
+<%= paginate @products %>
