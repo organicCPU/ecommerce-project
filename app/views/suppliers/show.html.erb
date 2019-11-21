@@ -1,1 +1,9 @@
-<h2><%= @supplier.name %></h2>
+<h2>Name: <%= @supplier.name %></h2>
+
+<div>Products:
+  <ul>
+  <% @supplier.products.each do |product| %>
+    <li><%= link_to product.name, product %></li>
+  <% end %>
+  </ul>
+</div>
