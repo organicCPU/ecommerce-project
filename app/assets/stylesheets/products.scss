@@ -1,3 +1,26 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.card {
+  display: table;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 0;
+  color: #494f5c;
+  text-align: left;
+  white-space: normal;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .card-content {
+    text-transform: uppercase;
+  }
+}
+
+.column > .card > .media-content {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 1rem;
+}

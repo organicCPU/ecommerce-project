@@ -1,5 +1,5 @@
-<% @products.each do |prod| %>
-  <p><%= link_to prod.name, prod %></p>
-<% end %>
+<div class="columns is-vcentered is-multiline">
+  <%= render partial: "products/product_card", collection: @products, :as => :product %>
+</div>
 
 <%= paginate @products %>
