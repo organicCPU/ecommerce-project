@@ -18,9 +18,6 @@
   }
 }
 
-.column > .card > .media-content {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 1rem;
+.title {
+  line-height: initial;
 }
