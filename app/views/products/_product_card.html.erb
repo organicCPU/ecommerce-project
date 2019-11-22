@@ -17,9 +17,12 @@
       </div>
     </div>
       <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item"><%= number_to_currency(product.price) %></a>
+        <% if @cart.include?(product) %>
+        <%= link_to 'Remove from cart', remove_from_cart_path(product.id), class: 'card-footer-item', method: :delete %>
+        <% else %>
+        <%= link_to 'Add to cart', add_to_cart_path(product.id), class: 'card-footer-item', method: :post %>
+        <% end %>
+        <p class="card-footer-item"><%= number_to_currency(product.price) %></p>
       </footer>
   </div>
 </div>
