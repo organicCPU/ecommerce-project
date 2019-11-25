@@ -11,17 +11,21 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def cart; end
+
   def add_to_cart
     product_id = parse_id
 
-    session[:cart] << product_id unless session[:cart].include?(product_id)
+    unless session[:cart].any? { |hash| hash['id'] == product_id }
+      session[:cart] << { id: product_id, quantity: 1 }
+    end
 
     redirect_to root_path
   end
 
   def remove_from_cart
     product_id = parse_id
-    session[:cart].delete(product_id)
+    session[:cart].delete_if { |hash| hash['id'] == product_id }
 
     redirect_to root_path
   end
@@ -38,6 +42,12 @@ class ProductsController < ApplicationController
   end
 
   def load_cart
-    @cart = Product.find(session[:cart])
+    @cart = Product.find(session[:cart].collect { |product| product['id'] })
+    @total = 0
+    @cart.each_with_index do |product, i|
+      @total += product.price * session[:cart][i]['quantity']
+    end
   end
+
+  helper_method :load_cart
 end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   delete '/products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
 
+  get '/cart', to: 'products#cart', as: 'cart'
   get ':permalink', to: 'pages#permalink', as: 'pages'
 
   root to: 'products#index'
