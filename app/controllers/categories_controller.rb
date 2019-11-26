@@ -5,5 +5,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @cart = load_cart
   end
 end

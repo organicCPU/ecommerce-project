@@ -1,11 +1,2 @@
-<h2>Name: <%= @product.name %></h2>
 
-<p>Description: <%= @product.description %></p>
-<p>Price: <%= @product.price %></p>
-<div>
-  Supplier: <%=link_to @product.supplier.name, @product.supplier %>
-</div>
-
-<div> 
-  Category: <%=link_to @product.category.name, @product.category %>
-</div>
+  <%= render partial: "products/show", object: @product, :as => :product %>

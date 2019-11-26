@@ -6,8 +6,13 @@ class ApplicationController < ActionController::Base
   private
 
   def load_cart
-    @cart = Product.find(session[:cart])
+    @cart = Product.find(session[:cart].collect { |product| product['id'] })
+    @total = 0
+    @cart.each_with_index do |product, i|
+      @total += product.price * session[:cart][i]['quantity']
+    end
   end
+
   helper_method :load_cart
 
   def navigation_pages

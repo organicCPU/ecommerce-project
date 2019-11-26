@@ -1,11 +1,13 @@
-<h2>Name: <%= @category.name %></h2>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <%= @category.name %>
+      </h1>
+    </div>
+  </div>
+</section>
 
-<p>Description: <%= @category.description %></p>
-<div>
-  Products:
-  <ul>
-  <% @category.products.each do |product| %>
-    <li><%= link_to product.name, product %></li>
-  <% end %>
-  </ul>
+<div class="columns is-vcentered is-multiline">
+  <%= render partial: "products/product_card", collection: @category.products, :as => :product %>
 </div>
