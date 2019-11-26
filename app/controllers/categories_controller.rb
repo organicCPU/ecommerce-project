@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   def index
     @categories = Category.all
@@ -5,6 +7,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @cart = load_cart
+    load_cart_instance
   end
 end

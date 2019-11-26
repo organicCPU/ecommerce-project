@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def load_cart
+  def load_cart_instance
     @cart = Product.find(session[:cart].collect { |product| product['id'] })
     @total = 0
     @cart.each_with_index do |product, i|
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :load_cart
+  helper_method :load_cart_instance
 
   def navigation_pages
     @navigation_pages = Page.where(show_in_navbar: true)

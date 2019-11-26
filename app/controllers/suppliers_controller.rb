@@ -7,6 +7,6 @@ class SuppliersController < ApplicationController
 
   def show
     @supplier = Supplier.find(params[:id])
-    @cart = load_cart
+    load_cart_instance
   end
 end
