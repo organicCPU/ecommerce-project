@@ -18,7 +18,7 @@
         <% end %>
         </div>
       </div>
-      <% if !@cart.empty? %>
+      <% if !@cart.nil? && !@cart.empty? %>
       <%= link_to("Cart (" + @cart.count.to_s + ")", cart_path, class: "navbar-item") %>
       <% end %>
     </div>
