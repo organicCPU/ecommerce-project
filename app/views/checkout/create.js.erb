@@ -1,0 +1,7 @@
+const stripe = Stripe('<%=Rails.application.credentials.stripe[:publishable_key] %>');
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @session.id %>'
+}).then((result) => {
+  console.log(result.error.message)
+})

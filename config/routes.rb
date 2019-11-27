@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   resources :suppliers, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :products, only: %i[index show]
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+  end
 
   post '/products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   delete '/products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'

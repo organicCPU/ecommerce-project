@@ -33,6 +33,7 @@
           </tr>
       </tbody>
 </table>
-    <p><button class='button is-primary'>Checkout</button></p>
+    <p>
+    <%= button_to 'Checkout', checkout_create_path, remote: true, method: :post, class: 'button is-primary'%></p>
   </div>
   <% end %>
