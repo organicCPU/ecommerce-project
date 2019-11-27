@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class CheckoutController < ApplicationController
-  def create
-    load_cart_instance
+  before_action :load_cart_instance
 
+  def create
     if @cart.nil?
       redirect_to cart_path
       return
@@ -34,7 +34,11 @@ class CheckoutController < ApplicationController
     end
   end
 
-  def success; end
+  def success
+    # Clear cart?
+  end
 
-  def cancel; end
+  def cancel
+    redirect_to cart_path
+  end
 end

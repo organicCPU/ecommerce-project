@@ -1,9 +1,9 @@
-<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
   <%= link_to(image_tag("/images/peepoHappy_banner_small.png", size: "100x48", alt: "peepoHappy"), root_path) %>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div id="navbar" class="navbar-menu">
     <div class="navbar-start">
       <%= link_to("Home", root_path, class: "navbar-item") %>
 
@@ -18,6 +18,9 @@
         <% end %>
         </div>
       </div>
+      <% if !@cart.empty? %>
+      <%= link_to("Cart (" + @cart.count.to_s + ")", cart_path, class: "navbar-item") %>
+      <% end %>
     </div>
 
     <div class="navbar-end">

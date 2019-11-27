@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   # private method that loads stuff
+  before_action :load_cart_instance
 
   private
 
