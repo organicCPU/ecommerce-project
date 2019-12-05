@@ -6,34 +6,8 @@
       <i>Your cart is empty!</i>
     </p>
     <% else %>
-    <table class="table is-striped">
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Unit Price</td>
-          <td>Quantity</td>
-          <td>Unit Total</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cart.each_with_index do |product, i| %>
-        <tr>
-            <td><%= product.name %></td>
-            <td><%= number_to_currency(product.price) %></td>
-            <td><%= number_field_tag('quantity', session[:cart][i]['quantity'], min: 0, class: 'input') %></td>
-            <td><%= number_to_currency(product.price) * session[:cart][i]['quantity'] %></td>
-            <td>edit</td>
-          </tr>
-        <% end %>
-          <tr>
-            <td><b>Total:</b></td>
-            <td></td>
-            <td></td>
-            <td><b><%= number_to_currency(@total) %></b></td>
-          </tr>
-      </tbody>
-</table>
-    <p>
-    <%= button_to 'Checkout', checkout_create_path, remote: true, method: :post, class: 'button is-primary'%></p>
+    <%= render partial: "products/item", collection: @cart, :as => :product, locals: { item_details: false, small_mode: true, is_cart: true } %>
+    <% end %>
   </div>
-  <% end %>
+
+  <%= button_to('Checkout - ' + number_to_currency(@total), checkout_create_path, remote: true, method: :post, class: 'button is-primary') unless @cart.empty?%>

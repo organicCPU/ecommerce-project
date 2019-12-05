@@ -1,0 +1,11 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Payment successful.
+      </h1>
+    </div>
+  </div>
+</section>
+
+<%= render partial: "products/item", collection: @items, :as => :product, locals: { item_details: false, small_mode: true } %>

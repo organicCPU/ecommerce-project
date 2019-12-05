@@ -7,41 +7,5 @@
     </div>
   </div>
 </section>
-<section>
-  <div class="card">
-    <div class="card-content">
-      <div class="media">
-        <% if product.image.present? %>
-        <div class="media-left">
-          <figure class="image">
-            <%= image_tag(product.image) %>
-          </figure>
-        </div>
-        <% end %>
-        <div class="content">
-          <% if product.description.present?%>
-          <div>
-          Description:
-          <%= product.description %>
-          </div>
-            <% end %>
-            <div>
-            Supplier: <%=link_to @product.supplier.name, @product.supplier %>
-          </div>
 
-          <div>
-            Category: <%=link_to @product.category.name, @product.category %>
-          </div>
-        </div>
-      </div>
-    </div>
-          <footer class="card-footer">
-        <% if @cart.include?(product) %>
-        <%= link_to 'Remove from cart', remove_from_cart_path(product.id), class: 'card-footer-item', method: :delete %>
-        <% else %>
-        <%= link_to 'Add to cart', add_to_cart_path(product.id), class: 'card-footer-item', method: :post %>
-        <% end %>
-        <p class="card-footer-item"><%= number_to_currency(product.price) %></p>
-      </footer>
-  </div>
-</section>
+  <%= render partial: "products/item", object: @product, :as => :product, locals: { item_details: true, small_mode: false } %>

@@ -1,0 +1,54 @@
+<section>
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image">
+            <% if product.image.present? %>
+              <%= image_tag(product.image, alt: product.name) %>
+            <% end %>
+          </figure>
+        </div>
+        <div class="content">
+        <% if small_mode %>
+          <div><%= link_to product.name, product %></div>
+          <div>Unit Price: <%= number_to_currency(product.price) %></div>
+          <div>
+          Quantity:
+          <% if is_cart %>
+          <%= number_field_tag('item_quantity_' + product_counter.to_s, session[:cart][product_counter]['quantity'].to_i, min: 1, class: 'input') %>
+          <% else %>
+          <%= session[:cart][product_counter]['quantity']%>
+          <% end %>
+          </div>
+          <div>Total Price: <%= number_to_currency(product.price) * session[:cart][product_counter]['quantity'] %> </div>
+        <% else %>
+          <% if product.description.present? %>
+            <div>
+            Description:
+            <%= product.description %>
+            </div>
+          <% end %>
+          <div>
+            Supplier: <%=link_to product.supplier.name, product.supplier %>
+          </div>
+
+          <div>
+            Category: <%=link_to product.category.name, product.category %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <% if item_details %>
+      <footer class="card-footer">
+        <% if !@cart.nil? && @cart.include?(product) %>
+        <%= link_to 'Remove from cart', remove_from_cart_path(product.id), class: 'card-footer-item', method: :delete %>
+        <% else %>
+        <%= link_to 'Add to cart', add_to_cart_path(product.id), class: 'card-footer-item', method: :post %>
+        <% end %>
+        <p class="card-footer-item"><%= number_to_currency(product.price) %></p>
+      </footer>
+    <% end %>
+  </div>
+</section>

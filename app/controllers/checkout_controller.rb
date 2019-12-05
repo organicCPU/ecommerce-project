@@ -2,6 +2,7 @@
 
 class CheckoutController < ApplicationController
   before_action :load_cart_instance
+  after_action :unload_cart, only: [:success]
 
   def create
     if @cart.nil?
@@ -36,6 +37,8 @@ class CheckoutController < ApplicationController
 
   def success
     # Clear cart?
+    @items = @cart
+    remove_instance_variable(:@cart)
   end
 
   def cancel
